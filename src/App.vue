@@ -24,48 +24,48 @@
 
 		      <!-- drawer content -->
 		      <div slot="drawer">
-		      	<ul style="padding:10px;padding-left:30px; list-style:none;background-color:rgb(0,50,78)">
-		      		<li style="margin-top:10px;text-align:left;">
+		      	<ul>
+		      		<li>
 		      			<router-link to="/" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >全部</router-link>
 		      		</li>
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<a href="https://github.com/realdennis" @click="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >Github</a>
 		      		</li>
 		      	</ul>
 		      	<br>
 		      		<p style="color:hsla(0,0%,100%,.6)">分類看板</p>
-			      	<ul style="padding-left:30px; list-style:none;background-color:rgb(0,50,78)">
-		      		<li style="margin-top:10px;text-align:left;">
+			      	<ul>
+		      		<li>
 		      			<router-link to="/movie" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >電影</router-link>
 		      		</li>
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<router-link to="/relationship" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >感情</router-link>
 		      		</li>
 
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<router-link to="/game" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >遊戲</router-link>
 		      		</li>
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<router-link to="/acg" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >動漫</router-link>
 		      		</li>
 		      	</ul>
 		      	<br>
 
 	      		<p style="color:hsla(0,0%,100%,.6)">校園看板</p>
-		      	<ul style="padding-left:30px; list-style:none;background-color:rgb(0,50,78)">
-		      		<li style="margin-top:10px;text-align:left;">
+		      	<ul>
+		      		<li>
 		      			<router-link to="/nctu" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >交通大學</router-link>
 		      		</li>
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<router-link to="/ncku" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >成功大學</router-link>
 		      		</li>
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<router-link to="/ntou" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >海洋大學</router-link>
 		      		</li>
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<router-link to="/ntu" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >台灣大學</router-link>
 		      		</li>
-		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
+		      		<li>
 		      			<router-link to="/nccu" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >政治大學</router-link>
 		      		</li>
 						</ul>
@@ -139,4 +139,15 @@ html, body {
   overflow-x: hidden;
 }
 
+ul {
+	padding:10px;
+	padding-left:30px; 
+	list-style:none;
+	background-color:rgb(0,50,78);
+}
+
+li {
+	margin-top:10px;
+	text-align:left;
+}
 </style>
