@@ -5,6 +5,7 @@
       <span class="gender">{{p.gender}}</span>
       <span class="forumName">{{p.forumName}}</span>
       <span class="school">{{p.school}}</span>
+      <span class="school" v-if="!p.school">匿名</span>
       <h3 class="title">{{p.title}}</h3>
       <p class="excerpt">{{p.excerpt}}</p>
       <div style="opacity: .35;">
@@ -28,16 +29,16 @@ export default {
     Cell,
     XHeader,Divider
   },
+  watch:{
+    '$route.params.board':function(board){
+      this.getPost(board);
+    }
+  },
   mounted(){
     console.log('mouted');
     let board = this.$route.params.board;
+    this.getPost(board);
 
-    if(board===undefined){
-      this.$http.get('https://b32de5f2.ngrok.io/https://www.dcard.tw/_api/posts?popular=true').then((response) => {
-        console.log(response.data)
-        this.posts = response.data
-      })
-    }
   },
   data () {
     return {
@@ -47,6 +48,21 @@ export default {
       // its initial state.
       msg: 'Hello World!',
       posts:{},
+    }
+  },
+  methods:{
+    getPost(board){
+      if(board==undefined){
+        this.$http.get('https://b32de5f2.ngrok.io/https://www.dcard.tw/_api/posts?popular=true').then((response) => {
+          console.log(response.data)
+          this.posts = response.data
+        })
+      }else{
+        this.$http.get('https://b32de5f2.ngrok.io/https://www.dcard.tw/_api/forums/'+board+'/posts?popular=true').then((response) => {
+          console.log(response.data);
+          this.posts = response.data;
+        });
+      }
     }
   }
 }
@@ -60,7 +76,8 @@ export default {
   width: 100px;
   height: 100px
 }
-
+.gender {
+}
 .post {
   border-bottom: 1px solid #dedede;
   padding:15px 0;

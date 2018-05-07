@@ -17,7 +17,7 @@
 	width="200px;"
 	:show.sync="drawerVisibility"
 	show-mode="push"
-	:drawer-style="{'background-color':'rgb(0, 45, 70)', width: '70vw','overflow':'scroll','padding-top':'46px'}">
+	:drawer-style="{'-webkit-overflow-scrolling':'touch;','background-color':'rgb(0, 45, 70)', width: '70vw','overflow':'scroll','padding-top':'46px'}">
 
 	<!-- drawer content -->
 		<div slot="drawer" >
@@ -147,9 +147,10 @@ li {
 
 #router-post {
 	padding-top:46px;
-	height:100%;
+	height: 90%;
 	margin:0 10px;
 	overflow-x:hidden;
 	overflow-y:scroll;
+	-webkit-overflow-scrolling:touch;
 }
 </style>
