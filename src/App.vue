@@ -29,7 +29,7 @@
 		      			<router-link to="/" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >全部</router-link>
 		      		</li>
 		      		<li style="margin-top:10px;text-align:left;background-color:rgb(0,50,78)">
-		      			<router-link to="https://github.com/realdennis" @click.native="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >Github</router-link>
+		      			<a href="https://github.com/realdennis" @click="drawerVisibility = false" style="font-size:20px;color:hsla(0,0%,100%,.6);" >Github</a>
 		      		</li>
 		      	</ul>
 		      	<br>
