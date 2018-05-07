@@ -7,7 +7,8 @@
 				      left:0;
 				      top:0;
 				      z-index:100;
-				      background-color:rgb(0, 106, 166)" :style="check">
+				      background-color:rgb(15, 107, 164);
+				      /*background-color:rgb(0, 106, 166)*/" :style="check">
 		<span>Dcard</span>
 		<x-icon @click="drawerVisibility = !drawerVisibility" slot="overwrite-left" type="navicon" size="35" style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
     </x-header>
@@ -17,9 +18,10 @@
 	width="200px;"
 	:show.sync="drawerVisibility"
 	show-mode="push"
-	:drawer-style="{'-webkit-overflow-scrolling':'touch','background-color':'rgb(0, 45, 70)', width: '70vw','overflow':'scroll','padding-top':'46px'}">
+	:drawer-style="{'-webkit-overflow-scrolling':'touch','background-color':/*'rgb(0, 45, 70)'*/'#00325f' ,width: '70vw','overflow':'scroll','padding-top':'46px'}">
 	<!-- drawer content -->
 		<div slot="drawer" >
+			<br>
 			<ul>
 				<li>
 					<router-link class="forum" to="/" @click.native="drawerVisibility = false" >全部</router-link>
@@ -29,23 +31,25 @@
 				</li>
 			</ul>
 
-			<p @click="dosomething('type1')" style="color:hsla(0,0%,100%,.6);margin:10px">分類看板</p>
-			<transition name="fade">
-			  	<ul :style="type1">
-					<li v-for="f in forums">
+			<p @click="type1 = !type1" style="color:hsla(0,0%,100%,.6);margin:10px;">分類看板</p>
+			<transition name="slide-fade">
+			  	<ul v-if="type1">
+					<li v-for="f in forums" >
 						<router-link class="forum" :to="f.alias" @click.native="drawerVisibility = false" >{{f.name}}</router-link>
 					</li>
 				</ul>
 			</transition>
 
-			<p @click="dosomething('type2')" style="color:hsla(0,0%,100%,.6); margin:10px">校園看板</p>
-			<transition name="fade">
-				<ul :style="type2">
-					<li v-for="s in schools">
+			<p @click="type2 = !type2" style="color:hsla(0,0%,100%,.6); margin:10px;">校園看板</p>
+			<transition name="slide-fade">
+				<ul v-if="type2">
+					<li v-for="s in schools" >
 						<router-link class="forum" :to="s.alias" @click.native="drawerVisibility = false"  >{{s.name}}</router-link>
 					</li>
 				</ul>
 			</transition>
+			<br>
+			<br>
 		</div>
 
 		<div id="router-post">
@@ -72,11 +76,9 @@ export default {
       	check:'',
       	schools:school,
       	forums:forum,
-      	type1:'',
-      	type2:''
+      	type1:false,
+      	type2:false
   	}
-  },
-  created(){
   },
   methods:{
     isShowNav () {
@@ -85,19 +87,16 @@ export default {
       }
       return true
     },
-    dosomething(type){
-    	if(type==="type1"){
-    		this.type1===''?this.type1='display:none':this.type1='';
-    	}else{
-    		this.type2===''?this.type2='display:none':this.type2='';
-    	}
-    }
   }
 }
 </script>
 
 <style lang="less">
 @import '~vux/src/styles/reset.less';
+
+#app{
+	margin:0 auto;
+}
 
 body {
   background-color: #fbf9fe;
@@ -113,6 +112,7 @@ ul {
 	padding:10px;
 	padding-left:30px; 
 	list-style:none;
+/*	background-color:rgb(71, 108, 201);*/
 	background-color:rgb(0,50,78);
 }
 
@@ -131,9 +131,21 @@ li {
 }
 
 .forum{
-	font-size:15px;color:hsla(0,0%,100%,.6);
+	font-size:15px;
+	color:hsla(0,0%,100%,.8);
 }
 .forum:hover{
 	color:pink
+}
+
+.slide-fade-enter-active {
+  transition: all .5s ;
+}
+.slide-fade-leave-active {
+  transition: all .3s ;
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateY(-20px);
+  opacity: 0;
 }
 </style>
