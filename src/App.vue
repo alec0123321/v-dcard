@@ -10,9 +10,10 @@
 				      background-color:rgb(15, 107, 164);
 				      /*background-color:rgb(0, 106, 166)*/" :style="check">
 		<span>V-Dcard</span>
-		<x-icon @click="drawerVisibility = !drawerVisibility" slot="overwrite-left" type="navicon" size="35" style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
+		<x-icon @click="drawerVisibility = !drawerVisibility" slot="overwrite-left" type="navicon" size="40" style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
     </x-header>
 
+    <x-icon @click="goBack" type="ios-arrow-thin-left" size="40" style="position:absolute;bottom:20;right:20;border:1px solid rgb(15, 107, 164);border-radius:100%;z-index:100"></x-icon>
 	<!-- main content -->
 	<drawer
 	width="200px;"
@@ -87,6 +88,9 @@ export default {
       }
       return true
     },
+    goBack(){
+    	history.go(-1);
+    }
   }
 }
 </script>
@@ -151,5 +155,9 @@ li {
 .slide-fade-enter, .slide-fade-leave-to{
   transform: translateY(-20px);
   opacity: 0;
+}
+
+.vux-x-icon {
+  fill: rgb(86, 167, 212);
 }
 </style>

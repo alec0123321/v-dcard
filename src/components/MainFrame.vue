@@ -1,7 +1,7 @@
 <template>
   <div id="Main">
     <div>
-       <tab :line-width=2 active-color='#fc378c' v-model="index">
+       <tab :line-width=2 active-color='rgb(86, 167, 212)' v-model="index">
         <tab-item v-for="item in list2" 
                   :key="item.index" 
                   @on-item-click="tabclick(item.popular)">

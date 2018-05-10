@@ -1,5 +1,6 @@
 <template>
   <div id="Post">
+
   	<div class="post-content commentEntry">
       <div v-if="content_loading==true" style="text-align:center">  	
 	      <br>
@@ -33,7 +34,7 @@
       </div>
   	</div>
 
-  	<div class="commentEntry">
+  	<div v-if="popular_comments.length!=0" class="commentEntry">
       <div v-if="popular_comment_loading==true" style="text-align:center">  	
 	      <br>
 	      <inline-loading></inline-loading>
@@ -65,17 +66,8 @@
 	  </div>
   	</div>
 
-  	<div class="commentEntry">
-      <div v-if="comment_loading==true" style="text-align:center">  	
-	      <br>
-	      <inline-loading></inline-loading>
-      </div>
-
-      <div v-else-if="comment_loading=='error'" style="text-align:center">
-        <br>
-      	Error
-      </div>
-      <div class="comment" v-else>
+  	<div v-infinite-scroll="getComments" infinite-scroll-disabled="busy" class="commentEntry">
+      <div class="comment">
       	<span style="opacity:.35">最新回應</span>
       	<div class="content" v-for="c in comments">
       		<div>
@@ -92,7 +84,17 @@
 		   		 <p class="likeCount" style="opacity:.35;">{{c.likeCount}} likes</p>
 		    </div>
         </div>
-	  </div>
+	</div>
+
+	<div v-if="comment_loading==true" style="text-align:center">  	
+	      <br>
+	      <inline-loading></inline-loading>
+	</div>
+
+	<div v-else-if="comment_loading=='error'" style="text-align:center">
+        <br>
+      	Error
+	</div>
   		
   	</div>
   </div>
@@ -100,12 +102,14 @@
 
 <script>
 import {InlineLoading} from 'vux'
+import infiniteScroll from 'vue-infinite-scroll'
 
 export default {
   components: {
   	InlineLoading
   },
   directives:{
+    infiniteScroll
   },
   watch:{
   	'$route.params.postId':function(postId){
@@ -125,7 +129,7 @@ export default {
     	content_loading:true,
     	comment_loading:true,
     	popular_comment_loading:true,
-    	before:undefined,
+    	after:0,
     	busy:false,
     	popular_comments:[],
     	comments:[],
@@ -146,7 +150,6 @@ export default {
       this.content_loading = true;
 	  this.$http.get(api+this.postId).then((response)=>{
             this.content = response.data;
-            console.log(this.content)
             this.content_loading=false
           }).catch((err)=>{
               console.log("error:");
@@ -174,17 +177,22 @@ export default {
   	},
 
   	getComments(){
+      if(this.busy) return;
+      this.busy = true;
+      //Mutex
+
       const CORS = 'https://c2250e18.ngrok.io/';
       let api = CORS + 'https://www.dcard.tw/_api/posts/';
       this.comment_loading = true;
       this.$http.get(api+this.postId+'/comments',{
       	params:{
-	      	before:this.before
+	      	after:this.after
 	      }
       }).then(response=>{
             this.commentsLength = response.data.length;
+            console.log(this.commentsLength)
             if(this.commentsLength===30){
-              this.before = response.data[this.commentsLength-1].id;
+              this.after += 30;
               this.busy = false;
             }
             else this.busy=true;
@@ -225,6 +233,11 @@ export default {
   padding: 24px 0;
   background-color: white;
   margin: 10px 0;
+}
+
+pre {
+white-space: pre-wrap;
+word-wrap: break-word;
 }
 
 </style>
