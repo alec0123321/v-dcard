@@ -9,7 +9,7 @@
 				      z-index:100;
 				      background-color:rgb(15, 107, 164);
 				      /*background-color:rgb(0, 106, 166)*/" :style="check">
-		<span>Dcard</span>
+		<span>V-Dcard</span>
 		<x-icon @click="drawerVisibility = !drawerVisibility" slot="overwrite-left" type="navicon" size="35" style="fill:#fff;position:relative;top:-8px;left:-3px;"></x-icon>
     </x-header>
 
@@ -53,21 +53,21 @@
 		</div>
 
 		<div id="router-post">
-		<router-view></router-view>
+			<router-view></router-view>
 		</div>
 	</drawer>
   </div>
 </template>
 
 <script>
-import { XHeader,Drawer,Group,Cell,Radio } from 'vux'
+import { XHeader,Drawer } from 'vux'
 import school from './components/school.json'
 import forum from './components/forum.json'
 
 export default {
   name: 'app',
   components: {
-    XHeader,Drawer,Group,Cell,Radio
+    XHeader,Drawer
   },
   data(){
   	return{
