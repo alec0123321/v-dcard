@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="height:100%;">
+  <div id="app" style="height:100%;" @click.right.prevent>
 
 	<x-header 
       style="width:100%;
@@ -114,6 +114,8 @@ html, body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
 ul {

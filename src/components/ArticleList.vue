@@ -143,11 +143,6 @@ export default {
   opacity:.35;
 }
 
-.post {
-  border-bottom: 1px solid #dedede;
-  padding:15px 0;
-  margin:0 10px;
-}
 
 #article {
   padding-bottom:70px;
@@ -190,5 +185,15 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.post {
+  border-bottom: 1px solid #dedede;
+  padding:15px 10px;
+  margin:0 0px;
+}
+
+.post:active{
+  background-color:rgba(255,192,203,.3);
 }
 </style>
