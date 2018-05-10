@@ -11,6 +11,7 @@
 
 ## 技術棧
  - 使用代理伺服器，做跨域請求 [_cors-anywhere_](https://github.com/Rob--W/cors-anywhere)，並部署於Heroku。
+ - 使用[_Dcard.js_](https://github.com/lockys/Dcard.js)裡頭的看板清單json。
  - 使用[_vux_](https://github.com/airyland/vux) (Vue UI component) 仿原生App的UI
  - 使用[_axios_](https://github.com/axios/axios)與 [_vue-infinite-scroll_](https://github.com/ElemeFE/vue-infinite-scroll) 做到異步請求與瀑布流
  - 使用 _vue-router_ 讓單頁面應用(_Single Page Application_)強健且強大。 
