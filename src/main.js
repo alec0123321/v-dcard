@@ -7,8 +7,8 @@ import App from './App'
 import Home from './components/MainFrame'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import post from './components/postContent'
 
-import 'iview/dist/styles/iview.css';
 Vue.use(VueRouter)
 Vue.use(VueAxios,axios)
 
@@ -18,7 +18,12 @@ const routes = [{
 },{
   path: '/:board',
   component: Home
-}]
+},{
+  path: '/post/:postId',
+  component: post
+}
+
+]
 
 const router = new VueRouter({
   routes

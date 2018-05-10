@@ -8,8 +8,9 @@
                 {{item.name}}</tab-item>
       </tab>
 
-    <ArticalList  :popular="popular"></ArticalList>
-
+    <transition name="slide-fade">
+      <ArticalList  :popular="popular"></ArticalList>
+    </transition>
     </div>
   </div>
 </template>
@@ -52,7 +53,6 @@ export default {
   methods:{
     tabclick(p){
       this.popular = p
-      console.log(this.popular)
     }
   }
 }
@@ -60,4 +60,14 @@ export default {
 
 <style>
 
+.slide-fade-enter-active {
+  transition: all .5s ;
+}
+.slide-fade-leave-active {
+  transition: all .3s ;
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateY(-20px);
+  opacity: 0;
+}
 </style>

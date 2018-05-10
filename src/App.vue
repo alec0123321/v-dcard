@@ -35,7 +35,7 @@
 			<transition name="slide-fade">
 			  	<ul v-if="type1">
 					<li v-for="f in forums" >
-						<router-link class="forum" :to="f.alias" @click.native="drawerVisibility = false" >{{f.name}}</router-link>
+						<router-link class="forum" :to="'/'+f.alias" @click.native="drawerVisibility = false" >{{f.name}}</router-link>
 					</li>
 				</ul>
 			</transition>
@@ -44,7 +44,7 @@
 			<transition name="slide-fade">
 				<ul v-if="type2">
 					<li v-for="s in schools" >
-						<router-link class="forum" :to="s.alias" @click.native="drawerVisibility = false"  >{{s.name}}</router-link>
+						<router-link class="forum" :to="'/'+s.alias" @click.native="drawerVisibility = false"  >{{s.name}}</router-link>
 					</li>
 				</ul>
 			</transition>
@@ -99,7 +99,11 @@ export default {
 }
 
 body {
+  box-sizing: border-box;
   background-color: #fbf9fe;
+  color: #495060;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html, body {

@@ -2,7 +2,7 @@
   <div id="article">
   <!-- Allpost -->
     <div v-infinite-scroll="getPost" infinite-scroll-disabled="busy">
-      <div class="post" v-for="p in posts">
+      <div class="post" v-for="p in posts" @click="clickPost(p.id)">
         <span class="gender">{{p.gender}}</span>
         <span class="forumName">{{p.forumName}}</span>
         <span class="school">{{p.school}}</span>
@@ -84,6 +84,9 @@ export default {
     }
   },
   methods:{
+    clickPost(id){
+      this.$router.push('/post/'+id)
+    },
     getPost(){
       
       if(this.busy) return;
@@ -151,16 +154,16 @@ export default {
 }
 
 .title {
-      color: rgb(38, 38, 38);
-    font-size: 17px;
-    font-weight: bold;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    margin: 0px 0px 8px;
+  color: rgb(38, 38, 38);
+  font-size: 17px;
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0px 0px 8px;
 }
 .excerpt {    
-  font-size: 13px;
+  font-size: 12px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
