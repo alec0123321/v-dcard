@@ -9,6 +9,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import post from './components/postContent'
 
+Vue.prototype.CORS = process.env.CORS || 'https://cors-realdennis.herokuapp.com/';
+
 Vue.use(VueRouter)
 Vue.use(VueAxios,axios)
 

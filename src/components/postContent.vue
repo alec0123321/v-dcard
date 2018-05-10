@@ -13,13 +13,14 @@
       </div>
 
       <div v-else class="comment">
-        <span class="gender">{{content.gender}}</span>
+        <span :style="colorful(content.gender)" class="gender">{{content.gender}}</span>
         <span class="school">{{content.school}}</span>
         <span class="school" v-if="!content.school">匿名</span>
         <h3 class="title">{{content.title}}</h3>
-
-        <span class="forumName">{{content.forumName}}</span>
-        <span class="time">{{ content.createdAt }}</span>
+        <div class="info">
+          <span class="forumName">{{content.forumName}}</span>
+          <span class="time">{{ beautyTime(content.createdAt) }}</span>
+        </div>
         <div >
         	<pre>{{content.content}}</pre>
 	        <div style="opacity: .35;">
@@ -27,8 +28,8 @@
 	          <span>, </span>
 	          <span class="commentCount">{{content.commentCount}} comments</span>
 	        </div>
-	        <div class="topic">
-	        	<span v-for="topic in content.topics"> {{ topic }} </span>
+	        <div>
+	        	<span class="topic" v-for="topic in content.topics"> {{ topic }} </span>
 	        </div>
         </div>
       </div>
@@ -50,13 +51,13 @@
       	<span style="opacity: .35;">熱門回應</span>
       	<div class="content" v-for="pc in popular_comments">
       		<div>
-		        <span class="gender">{{pc.gender}}</span>
+		        <span :style="colorful(content.gender)" class="gender">{{pc.gender}}</span>
 		        <span class="school">{{pc.school}}</span>
 		        <span class="school" v-if="!pc.school">匿名</span>
 		    </div>
-		    <div>
+		    <div class="info">
 		    	<span class="floor">B{{pc.floor}}</span>
-		    	<span class="time">{{pc.createdAt}}</span>
+		    	<span class="time">{{beautyTime(pc.createdAt)}}</span>
 		    </div>
 		    <div>
 		    	<pre>{{pc.content}}</pre>
@@ -71,13 +72,13 @@
       	<span style="opacity:.35">最新回應</span>
       	<div class="content" v-for="c in comments">
       		<div>
-		        <span class="gender">{{c.gender}}</span>
+		        <span :style="colorful(content.gender)" class="gender">{{c.gender}}</span>
 		        <span class="school">{{c.school}}</span>
 		        <span class="school" v-if="!c.school">匿名</span>
 		    </div>
-		    <div>
+		    <div class="info">
 		    	<span class="floor">B{{c.floor}}</span>
-		    	<span class="time">{{c.createdAt}}</span>
+		    	<span class="time">{{ beautyTime(c.createdAt) }}</span>
 		    </div>
 		    <div>
 		    	<pre>{{c.content}}</pre>
@@ -137,7 +138,19 @@ export default {
 
     }
   },
-  methods:{
+  computed:{
+  },
+  methods:{    
+    colorful(g){
+      if(g==='F') return 'color:rgb(255,192,203);'
+      else if(g==='M') return 'color:rgb(30,144,255);'
+      else return
+    },
+    beautyTime(time){
+      let t = new Date(time);
+
+      return t.getMonth()+'月'+t.getDate()+'日 '+t.getHours()+':'+t.getMinutes() 
+    },
   	initial(){
 	  	this.postId = this.$route.params.postId
 	  	this.getContent();
@@ -145,8 +158,9 @@ export default {
 	  	this.getComments();
   	},
   	getContent(){
-      const CORS = 'https://c2250e18.ngrok.io/';
-      let api = CORS + 'https://www.dcard.tw/_api/posts/';
+      //const CORS = 'https://cors-realdennis.herokuapp.com/';
+      let api = this.CORS + 'https://www.dcard.tw/_api/posts/';
+
       this.content_loading = true;
 	  this.$http.get(api+this.postId).then((response)=>{
             this.content = response.data;
@@ -158,8 +172,8 @@ export default {
      	})
   	},
   	getPopularComments(){
-      const CORS = 'https://c2250e18.ngrok.io/';
-      let api = CORS + 'https://www.dcard.tw/_api/posts/';
+      //const CORS = 'https://cors-realdennis.herokuapp.com/';
+      let api = this.CORS + 'https://www.dcard.tw/_api/posts/';
       this.comment_loading = true;
       this.$http.get(api+this.postId+'/comments',{
       	params:{
@@ -181,8 +195,8 @@ export default {
       this.busy = true;
       //Mutex
 
-      const CORS = 'https://c2250e18.ngrok.io/';
-      let api = CORS + 'https://www.dcard.tw/_api/posts/';
+      //const CORS = 'https://cors-realdennis.herokuapp.com/';
+      let api = this.CORS + 'https://www.dcard.tw/_api/posts/';
       this.comment_loading = true;
       this.$http.get(api+this.postId+'/comments',{
       	params:{
@@ -230,9 +244,25 @@ export default {
   margin:0 10px;
 }
 .commentEntry{
-  padding: 24px 0;
+  padding: 20px 0;
   background-color: white;
-  margin: 10px 0;
+  margin-bottom: 10px;
+}
+.floor {
+  padding-right: 5px;
+  border-right:solid 1px gray;
+}
+.info {
+  font-size:12px;
+  opacity: .45;
+}
+.topic {
+  background-color:rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.8125em;
+  margin: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
 }
 
 pre {
